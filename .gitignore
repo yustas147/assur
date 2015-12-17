@@ -1,0 +1,6 @@
+fleet*
+*swp
+*pyc
+i18n/
+security/
+static/
