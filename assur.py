@@ -19,36 +19,45 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv
+from openerp import models, fields
+#from openerp.osv import models, fields, osv
 #import time
 #import datetime
-from openerp import tools
-from openerp.osv.orm import except_orm
+#from openerp import tools
+#from openerp.osv.orm import except_orm
 #from openerp.tools.translate import _
 #from dateutil.relativedelta import relativedelta
 
-class assur_obj(osv.Model):
+
+
+class assur_obj_otype(models.Model):
+    _name = 'assur.obj.otype'
+    _description = 'Contains top-level types of assurance objects'
+
+    name = fields.Char('Assurance object type', required=True)
+    
+
+class assur_obj(models.Model):
     _name = 'assur.obj'
     _description = 'Contains different assurance objects'
 
-    _columns = {
-        'name':fields.char('Assurance object', required=True),
-    }
+    name = fields.Char('Assurance object', required=True)
+    otype = fields.Many2one('assur.obj.otype','otype')
+    obj_prop_vals = fields.One2many('assur.obj.prop.val','assur_obj_id', string='Assur obj property values')
+    obj_props = fields.Many2many(comodel_name='assur.obj.prop',relation='assur_obj_prop_val',column1='assur_obj_id',column2='assur_obj_prop_id')
 
-class assur_obj_prop(osv.Model):
+class assur_obj_prop(models.Model):
     _name = 'assur.obj.prop'
     _description = 'Contains different assurance object properties'
 
-    _columns = {
-        'name':fields.char('Assurance object`s property', required=True),
-    }
+    name = fields.Char('Assurance object`s property', required=True)
+    #vals = fields.
 
-class assur_obj_prop_value(osv.Model):
-    _name = 'assur.obj.prop.value'
+class assur_obj_prop_val(models.Model):
+    _name = 'assur.obj.prop.val'
     _description = 'Contains real values of assurance object`s properties'
 
-    _columns = {
-        'name':fields.char('Assurance object`s property', required=True),
-        'assur_obj_id':fields.many2one('assur.obj', 'Assurance object'),
-        'assur_obj_prop_id':fields.many2one('assur.obj.prop', 'Assurance object property'),
-    }
+    name = fields.Char('Assurance object`s property Values', required=True)
+    assur_obj_id = fields.Many2one('assur.obj', 'Assurance object')
+    assur_obj_prop_id = fields.Many2one('assur.obj.prop', 'Assurance object property')
+    assur_obj_prop_val_otype = fields.Many2one('assur.obj.otype', related='assur_obj_id.otype')

@@ -38,11 +38,11 @@ Main Features
     'depends' : [
         'base',
         'crm',
-        'sales'
+        'sale'
     ],
     'data' : [
         'ass_view.xml',
-        'ass_obj',
+      #  'ass_obj',
     ],
 
     'demo': [],
