@@ -42,7 +42,7 @@ Main Features
     ],
     'data' : [
         'ass_view.xml',
-      #  'ass_obj',
+        'td_car_view.xml',
     ],
 
     'demo': [],

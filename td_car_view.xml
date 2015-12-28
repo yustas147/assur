@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model='ir.ui.view' id='td_car_form'>
+            <field name="name">td.car.form</field>
+            <field name="model">td.car</field>
+            <field name="arch" type="xml">
+                <form string="Tecdoc car">
+                    <sheet>
+                                 <field name='name'  /> 
+                                 <field name="td_car_brand_id" /> 
+                                 <field name="td_car_model_id" /> 
+                                 <field name="td_car_modif_id" /> 
+                                 <field name="fuel_type" /> 
+                                 <field name="engine" /> 
+                                 <field name="years" /> 
+                                 <field name="power" /> 
+                    </sheet>
+                 </form>
+                </field>
+        </record>
+        <record model='ir.ui.view' id='td_car_tree'>
+            <field name="name">td.car.tree</field>
+            <field name="model">td.car</field>
+            <field name="arch" type="xml">
+                <tree string="Tecdoc cars">
+                                 <field name="name" />
+                                 <field name="td_car_brand_id" />
+                                 <field name="td_car_model_id" /> 
+                                 <field name="td_car_modif_id" /> 
+                                 <field name="fuel_type" /> 
+                                 <field name="engine" /> 
+                                 <field name="years" /> 
+                                 <field name="power" /> 
+                 </tree>
+                </field>
+        </record>
+                 
+        <record model='ir.actions.act_window' id='td_car_act'>
+            <field name="name">Tecdoc cars</field>
+            <field name="res_model">td.car</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+                 
+                 
+        <menuitem name="Td cars" parent="menu_root" id="td_cars_mit_id" sequence="2"/>
+        <menuitem action="td_car_act" parent="td_cars_mit_id" id="td_car_menu" />
+     <!--   
+     -->
+    </data>
+</openerp>

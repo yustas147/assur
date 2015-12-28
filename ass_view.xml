@@ -7,16 +7,14 @@
             <field name="model">assur.obj</field>
             <field name="arch" type="xml">
                 <form string="Vehicle">
-                    <header>
-                    </header>
                     <sheet>
-                       <label for="name" class="oe_edit_only"/>
-                            <h1>
-                                 <field name='name' class="oe_inline" /> 
-                                 <field name="otype" class="oe_inline" /> 
+                                 <field name='name'  /> 
+                                 <field name="otype" /> 
                                  <field name="obj_prop_vals" /> 
-                                 <field name="obj_props" /> 
-                            </h1> 
+                                <label for="automodel" string="Automodel"/>
+                                 <field name="automodel" attrs="{'invisible' : [('is_auto','=',False)]}"/> 
+				<label for="is_auto" string="Select for automobiles"/>
+                                 <field name="is_auto" /> 
                     </sheet>
                  </form>
                 </field>
@@ -29,11 +27,12 @@
                     <header>
                     </header>
                     <sheet>
-                       <label for="name" class="oe_edit_only"/>
-                                 <field name='name' class="oe_inline" />
-                                 <field name="assur_obj_id" />
+				<label for="assur_ubj_prop_id" string="Property"/>
                                  <field name="assur_obj_prop_id" />
-                                 <field name="assur_obj_prop_val_otype" />
+				<label for="name" string="Value"/>
+                                 <field name='name' />
+                                 <!-- <field name="assur_obj_id" /> -->
+                    <!--             <field name="assur_obj_prop_val_otype" /> -->
                     </sheet>
                  </form>
                 </field>
@@ -50,6 +49,21 @@
                  </tree>
                 </field>
         </record>
+        <record model='ir.ui.view' id='assur_company_form'>
+            <field name="name">assur.company.form</field>
+            <field name="model">assur.company</field>
+            <field name="arch" type="xml">
+                <form string="Assurance company">
+                    <sheet>
+                                <label for="name" string="Assurance company name:"/>
+                                 <field name='name'  />
+                                <label for="assur_prop_otype_company_ids" string="Rules for coefficient calculations"/>
+                                 <field name="assur_prop_otype_company_ids" />
+                    </sheet>
+                 </form>
+                </field>
+        </record>
+
 
 
                  
@@ -68,6 +82,14 @@
               </p>
             </field>
         </record>
+ 
+        <record model='ir.actions.act_window' id='ass_company_act'>
+            <field name="name">Assurance companies</field>
+            <field name="res_model">assur.company</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
 
                  
                  
@@ -91,8 +113,10 @@
         </record>
         <menuitem name="Assurance" id="menu_root"/>
         <menuitem name="Ass objects" parent="menu_root" id="assur_obj_mit_id" sequence="2"/>
+        <menuitem name="Assurance companies" parent="menu_root" id="assur_co_mit_id" sequence="2"/>
         <menuitem name="Ass obj prop vals" parent="menu_root" id="assur_obj_prop_val_mit_id" sequence="2"/>
         <menuitem action="ass_obj_act" parent="assur_obj_mit_id" id="ass_obj_menu" />
         <menuitem action="ass_obj_prop_val_act" parent="assur_obj_prop_val_mit_id" id="ass_obj_prop_val_menu" />
+        <menuitem action="ass_company_act" parent="assur_co_mit_id" id="ass_co_menu" />
     </data>
 </openerp>
