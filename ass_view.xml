@@ -15,10 +15,27 @@
                                  <field name="automodel" attrs="{'invisible' : [('is_auto','=',False)]}"/> 
 				<label for="is_auto" string="Select for automobiles"/>
                                  <field name="is_auto" /> 
+                                 <button name="calc_str" type="object" string="calc_str"/>
+                                <label for="strahinfo_display" string="Strahinfo:"/>
+                                 <field name="strahinfo_display" /> 
+                                 <button name="calc_co" type="object" string="calc_co"/>
+                                 <button name="create_prop_vals" type="object" string="create prop vals"/>
                     </sheet>
                  </form>
                 </field>
         </record>
+
+  <!--       <record model='ir.ui.view' id='assur_obj_form_inh_auto'>
+            <field name="name">assur.obj.form.inh.auto</field>
+            <field name="model">aobj.auto.light</field>
+            <field name="inherit_id" ref='assur_obj_form'/>
+            <field name="arch" type="xml">
+                  <xpath expr="//form//sheet//button[@name='calc_co']" position='after'>
+                      <field name='auto_engine_size_in_litres'/>
+                  </xpath>
+                </field>
+        </record> -->
+
 	<record model='ir.ui.view' id='assur_obj_prop_val_form'>
             <field name="name">assur.obj.prop.val.form</field>
             <field name="model">assur.obj.prop.val</field>
@@ -59,12 +76,58 @@
                                  <field name='name'  />
                                 <label for="assur_prop_otype_company_ids" string="Rules for coefficient calculations"/>
                                  <field name="assur_prop_otype_company_ids" />
+                                 <button name="access_obj_pvs" type="object" string="access_obj_pvs"/>
                     </sheet>
                  </form>
                 </field>
         </record>
 
-
+        <record model='ir.ui.view' id='assur_calc_form'>
+            <field name="name">assur.calc.form</field>
+            <field name="model">assur.calc</field>
+            <field name="arch" type="xml">
+                <form string="Calculator">
+                    <sheet>
+                                <label for="assur_obj_id" string="Corresponding object:"/>
+                                 <field name='assur_obj_id'  />
+                                <label for="assur_company_id" string="Corresponding company:"/>
+                                 <field name="assur_company_id" />
+                                 <button name="calc_coeff" string="calc_coeff" type="object"/>
+                    </sheet>
+                 </form>
+                </field>
+        </record>
+        <record model='ir.ui.view' id='ins_otype_form'>
+            <field name="name">ins.otype.form</field>
+            <field name="model">assur.obj.otype</field>
+            <field name="arch" type="xml">
+                <form string="Insurance object types">
+                    <sheet>
+                                <label for="name" string="Type name"/>
+                                 <field name='name'  />
+                                <label for="int_name" string="Internal type name with prefix"/>
+                                 <field name="int_name" />
+                                <label for="properties" string="Possible properties of this type"/>
+                                 <field name="properties" />
+                    </sheet>
+                 </form>
+                </field>
+        </record>
+        
+        <record model='ir.ui.view' id='ins_prop_form'>
+            <field name="name">ins.prop.form</field>
+            <field name="model">assur.obj.prop</field>
+            <field name="arch" type="xml">
+                <form string="Insurance object types">
+                    <sheet>
+                                <label for="name" string="Property name"/>
+                                 <field name='name'  />
+                                <label for="otypes" string="Poperty possible types"/>
+                                 <field name="otypes" />
+                    </sheet>
+                 </form>
+                </field>
+        </record>
 
                  
         <record model='ir.actions.act_window' id='ass_obj_prop_val_act'>
@@ -89,6 +152,14 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
+        
+        <record model='ir.actions.act_window' id='ins_object_types_act'>
+            <field name="name">Object types</field>
+            <field name="res_model">assur.obj.otype</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
 
 
                  
@@ -111,12 +182,44 @@
               </p>
             </field>
         </record>
+<!--         <record model='ir.actions.act_window' id='ass_obj_act_auto'> -->
+<!--             <field name="name">Ass objects automobiles</field> -->
+<!--             <field name="res_model">aobj.auto.light</field> -->
+<!--             <field name="view_type">form</field> -->
+<!--             <field name="view_mode">tree,form</field> -->
+<!--         </record> -->
+        
+        <record model='ir.actions.act_window' id='ass_calc_act'>
+            <field name="name">Ass calculator</field>
+            <field name="res_model">assur.calc</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model='ir.actions.act_window' id='ins_otype_act'>
+            <field name="name">Insurance object types</field>
+            <field name="res_model">assur.obj.otype</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model='ir.actions.act_window' id='ins_prop_act'>
+            <field name="name">Insurance object properties</field>
+            <field name="res_model">assur.obj.prop</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
         <menuitem name="Assurance" id="menu_root"/>
         <menuitem name="Ass objects" parent="menu_root" id="assur_obj_mit_id" sequence="2"/>
         <menuitem name="Assurance companies" parent="menu_root" id="assur_co_mit_id" sequence="2"/>
+        <menuitem name="Assurance calculators" parent="menu_root" id="assur_calc_mit_id" sequence="2"/>
         <menuitem name="Ass obj prop vals" parent="menu_root" id="assur_obj_prop_val_mit_id" sequence="2"/>
         <menuitem action="ass_obj_act" parent="assur_obj_mit_id" id="ass_obj_menu" />
+        <!-- <menuitem action="ass_obj_act_auto" parent="assur_obj_mit_id" id="ass_obj_menu_auto" /> -->
+        <menuitem action="ins_otype_act" parent="assur_obj_mit_id" id="ass_obj_otype_menu" /> -->
+        <menuitem action="ins_prop_act" parent="assur_obj_mit_id" id="ass_obj_prop_menu" /> -->
         <menuitem action="ass_obj_prop_val_act" parent="assur_obj_prop_val_mit_id" id="ass_obj_prop_val_menu" />
         <menuitem action="ass_company_act" parent="assur_co_mit_id" id="ass_co_menu" />
+<!--         <menuitem action="ass_calc_act" parent="assur_calc_mit_id" id="ass_calc_menu" /> -->
     </data>
 </openerp>
