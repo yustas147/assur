@@ -161,8 +161,8 @@ class assur_company(models.Model):
         obj_model = self.env['assur.obj']
         obj_rec = obj_model.browse(obj_id)
         otype_id = obj_rec.otype.id    
-        print "Object type id is: "+unicode(obj_rec.otype.id)
-        print "Object type name is: "+unicode(obj_rec.otype.name)
+        #print "Object type id is: "+unicode(obj_rec.otype.id)
+        #print "Object type name is: "+unicode(obj_rec.otype.name)
         res=1
 #        res=[]
 #        for opval in obj_rec.obj_prop_vals:
