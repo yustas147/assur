@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="sale_order_inh" model="ir.ui.view">
+            <field name="name">sale.order.form.strah</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml"> 
+                <xpath expr="//field[@name='partner_id']" position='before' > 
+                    <field name='is_strah' label='Is it Strahovka?' />
+                </xpath>
+                <xpath expr="//notebook" position='after' > 
+                   <group attrs="{'invisible':[('is_strah','=',False)]}">
+<!--                      <label for="str_obj" string="Vyberite object strahovaniya:"/> -->
+                     <field name='str_obj' /> 
+                     <newline />
+                     <button name='get_coeffs' type='object' string='Get ass coeffs'/>
+                     <button name='set_price_unit' type='object' string='Set unit price'/>
+                   </group>
+                </xpath>
+            </field>
+        </record>
+</data>    
+</openerp>

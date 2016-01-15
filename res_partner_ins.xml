@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="res_partner_ins_inh" model="ir.ui.view">
+            <field name="name">res.partner.form.strah</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml"> 
+                <xpath expr="//field[@name='parent_id']" position='before' > 
+                  <group attrs="{'invisible':[('is_company','=',False)]}">
+                    <field name='insur_id' placeholder="Insurance company" nolabel="1" class="oe_left" attrs="{'invisible':[('isit_strah','=',False)]}" /> 
+                    <newline/>
+                   <div class='oe_edit_only'>
+                    <b>
+                    <field name='isit_strah'/> <label for='isit_strah' string='Is it Strahovaya?' />
+                    </b>
+                    </div>
+                  </group>
+                </xpath>
+      <!--           <xpath expr="//notebook" position='after' > 
+                   <group attrs="{'invisible':[('is_strah','=',False)]}">
+                     <label for="str_obj" string="Vyberite object strahovaniya:"/>
+                     <field name='str_obj' /> 
+                     <newline />
+                     <button name='get_coeffs' type='object' string='Get ass coeffs'/>
+                     <button name='set_price_unit' type='object' string='Set unit price'/>
+                   </group>
+                </xpath> -->
+            </field>
+        </record>
+</data>    
+</openerp>

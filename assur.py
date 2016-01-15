@@ -113,6 +113,15 @@ class assur_obj(models.Model):
 #        self.strahinfo_display = unicode(res)
         return res
 
+    @api.multi
+    @api.model
+    def calc_coeff(self, ins_company):
+#         for assco in ass_cos:
+#             resco = assco.calc_obj_pvs(self)
+#             print unicode(resco)
+#             res[assco.name] = unicode(resco)
+        return ins_company.calc_obj_pvs(self)
+
 # class aobj_auto_light(models.Model):
 #     _name = 'aobj.auto.light'
 #     _inherits = {'assur.obj':'obj_id'}
@@ -143,6 +152,11 @@ class assur_obj_prop_val(models.Model):
     assur_obj_prop_id = fields.Many2one('assur.obj.prop', string='Assurance object property')
     assur_obj_prop_val_otype = fields.Many2one('assur.obj.otype', related='assur_obj_id.otype', string='Assur obj type')
 
+# class contract_type(models.model):
+#     _name = 'contr.type'
+#     _description = 'Info specific to contract types'
+    
+    name = fields.Char('Contract type')
 class assur_company(models.Model):
     _name = 'assur.company'
     _description = 'Assur companies info: assur. prop. coefficients'

@@ -43,6 +43,8 @@ Main Features
     'data' : [
         'ass_view.xml',
         'td_car_view.xml',
+        'sale.xml',
+        'res_partner_ins.xml',
     ],
 
     'demo': [],
