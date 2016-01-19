@@ -58,7 +58,7 @@
             <field name="name">assur.obj.prop.val.tree</field>
             <field name="model">assur.obj.prop.val</field>
             <field name="arch" type="xml">
-                <tree string="Assur. prop. values">
+                <tree string="Assur. prop. values" editable='bottom'>
                                  <field name="assur_obj_prop_id" />
                                  <field name='name' class="oe_inline" />
                                  <field name="assur_obj_id" />
@@ -79,6 +79,18 @@
                                  <button name="access_obj_pvs" type="object" string="access_obj_pvs"/>
                     </sheet>
                  </form>
+                </field>
+        </record>
+        <record model='ir.ui.view' id='assur_prop_otype_company_tree'>
+            <field name="name">assur.prop.otype.company.tree</field>
+            <field name="model">assur.prop.otype.company</field>
+            <field name="arch" type="xml">
+                <tree string="Assur. prop. values" editable="top">
+                                 <field name="assur_company_id" />
+                                 <field name="assur_prop_id" />
+                                 <field name="assur_otype_id" />
+                                 <field name="assur_cpoargs_func" />
+                 </tree>
                 </field>
         </record>
 
@@ -159,6 +171,12 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
+        <record model='ir.actions.act_window' id='ins_prop_otype_company_act'>
+            <field name="name">Pravila obrabotki svojstv</field>
+            <field name="res_model">assur.prop.otype.company</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
         
 
 
@@ -220,6 +238,7 @@
         <menuitem action="ins_prop_act" parent="assur_obj_mit_id" id="ass_obj_prop_menu" /> -->
         <menuitem action="ass_obj_prop_val_act" parent="assur_obj_prop_val_mit_id" id="ass_obj_prop_val_menu" />
         <menuitem action="ass_company_act" parent="assur_co_mit_id" id="ass_co_menu" />
+        <menuitem action="ins_prop_otype_company_act" parent="assur_co_mit_id" id="ins_poc_menu" />
 <!--         <menuitem action="ass_calc_act" parent="assur_calc_mit_id" id="ass_calc_menu" /> -->
     </data>
 </openerp>

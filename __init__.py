@@ -18,6 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import assur, tdcar, sale, res_partner_insur
+import assur, tdcar, sale, res_partner_insur, product_strah
 
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="product_strah_inh" model="ir.ui.view">
+            <field name="name">product.strah.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml"> 
+                <xpath expr="//label[@for='sale_ok']" position='after' > 
+                    <newline/>
+                    <field name='is_it_strah' label='Is it Strahovka?' />
+                    <label for='is_it_strah'/>
+                </xpath>
+                <xpath expr="//field[@name='description']" position='before' > 
+                   <group attrs="{'invisible':[('is_it_strah','=',False)]}">
+                    <label for='product_otype' string='Product primenim k sled. tipam objectov strahovaniya:' />
+                    <newline/>
+                    <field name='product_otype' nolabel="1"/>
+                   </group>
+                </xpath>
+                <!-- <xpath expr="//notebook" position='after' > 
+                   <group attrs="{'invisible':[('is_strah','=',False)]}">
+                     <label for="str_obj" string="Vyberite object strahovaniya:"/>
+                     <field name='str_obj' /> 
+                     <newline />
+                     <button name='get_coeffs' type='object' string='Get ass coeffs'/>
+                     <button name='set_price_unit' type='object' string='Set unit price'/>
+                   </group>
+                </xpath> -->
+            </field>
+        </record>
+</data>    
+</openerp>

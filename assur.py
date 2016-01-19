@@ -147,7 +147,7 @@ class assur_obj_prop_val(models.Model):
     _name = 'assur.obj.prop.val'
     _description = 'Contains real values of assurance object`s properties'
 
-    name = fields.Char('Assurance object`s property Values', required=True)
+    name = fields.Char('OPValue', required=True)
     assur_obj_id = fields.Many2one('assur.obj', string='Assurance object')
     assur_obj_prop_id = fields.Many2one('assur.obj.prop', string='Assurance object property')
     assur_obj_prop_val_otype = fields.Many2one('assur.obj.otype', related='assur_obj_id.otype', string='Assur obj type')
@@ -156,7 +156,7 @@ class assur_obj_prop_val(models.Model):
 #     _name = 'contr.type'
 #     _description = 'Info specific to contract types'
     
-    name = fields.Char('Contract type')
+    #name = fields.Char('Contract type')
 class assur_company(models.Model):
     _name = 'assur.company'
     _description = 'Assur companies info: assur. prop. coefficients'

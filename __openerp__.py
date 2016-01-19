@@ -45,6 +45,7 @@ Main Features
         'td_car_view.xml',
         'sale.xml',
         'res_partner_ins.xml',
+        'product_strah.xml',
     ],
 
     'demo': [],

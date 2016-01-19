@@ -5,6 +5,7 @@ Created on 14 ���. 2016 �.
 @author: yustas
 '''
 from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 class sale_order(osv.osv):
     _inherit = 'sale.order'
@@ -14,7 +15,10 @@ class sale_order(osv.osv):
         curr_sale_ord = self.browse(cr, uid, ids)[0]
         strobj = curr_sale_ord.str_obj
         for ol in curr_sale_ord.order_line:
-            strahovajka = ol.product_id.seller_ids[0].name.insur_id
+            try:
+                strahovajka = ol.product_id.seller_ids[0].name.insur_id
+            except IndexError:
+                raise osv.except_osv(_('Warning!'), _('Selected product "'+ ol.product_id.name + '" must be supplied by insurance company!'))
             koeff = strobj.calc_coeff(strahovajka)
             newprice = koeff*ol.product_id.list_price
             ol.write({'price_unit':newprice})
