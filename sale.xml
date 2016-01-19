@@ -16,6 +16,7 @@
                      <newline />
                      <button name='get_coeffs' type='object' string='Get ass coeffs'/>
                      <button name='set_price_unit' type='object' string='Set unit price'/>
+                     <button name='get_prodlist' type='object' string='get prod list'/>
                    </group>
                 </xpath>
             </field>

@@ -20,6 +20,7 @@
                                  <field name="strahinfo_display" /> 
                                  <button name="calc_co" type="object" string="calc_co"/>
                                  <button name="create_prop_vals" type="object" string="create prop vals"/>
+                                 <button name="make_prodlist" type="object" string="make prod list"/>
                     </sheet>
                  </form>
                 </field>

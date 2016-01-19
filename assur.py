@@ -112,6 +112,29 @@ class assur_obj(models.Model):
         self.strahinfo_display = txt
 #        self.strahinfo_display = unicode(res)
         return res
+    
+    @api.multi    
+    @api.model
+    def make_prodlist(self):
+        res={}
+        for prod in self.env['product.product'].search([('is_it_strah','=',True)]):
+            if self.otype in prod.product_otype:
+                #najdem strahovuju companiju
+                insur_co = prod.seller_ids[0].name.insur_id
+#                insur_co_id = prod.seller_ids[0].name.insur_id
+                #insur_co = self.env['assur.company'].browse([insur_co_id]) 
+                prod_price = prod.list_price*insur_co.calc_obj_pvs(self)
+                res.setdefault(insur_co.name,[])
+                res[insur_co.name].append(prod.name+': '+unicode(prod_price))
+                print insur_co
+        print res
+        result = ''
+        for assco in res.keys():
+            result += assco + ': \n'
+            for prod in res[assco]:
+                result += '    '+prod+'\n'
+        self.strahinfo_display = result
+        return result
 
     @api.multi
     @api.model

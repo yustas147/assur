@@ -34,6 +34,15 @@ class sale_order(osv.osv):
 #        curr_sale_ord.write({'note':ass_info})
         return True
 
+    def get_prodlist(self, cr, uid, ids, context = False):
+        curr_sale_ord = self.browse(cr, uid, ids)[0]
+        strobjpool = self.pool.get('assur.obj')
+        obj_inst = strobjpool.browse(cr, uid, [curr_sale_ord.str_obj.id])[0]
+        #ass_info = obj_inst.calc_co()
+        curr_sale_ord.write({'note':obj_inst.make_prodlist()})
+#        curr_sale_ord.write({'note':ass_info})
+        return True
+
     _columns = {
                 'is_strah':fields.boolean(string='Is it strahovka?'),
                 'str_obj':fields.many2one('assur.obj', string="Object strahovaniya"),
